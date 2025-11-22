@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melody Makers | Premium Musical Instruments</title>
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --font-main: 'Arial', sans-serif;
+            --font-size-base: 16px;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 2rem;
+            --border-radius: 4px;
+        }
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* Page Management */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--primary-color);
+            color: white;
+            padding: var(--spacing-md) 0;
+            border-bottom: 3px solid var(--secondary-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #branding h1 {
+            font-size: 1.8rem;
+        }
+
+        .highlight {
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: var(--spacing-lg);
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        nav ul li.current a {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        .btn-secondary {
+            background: var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            background: #c0392b;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+        }
+
+        #hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* Features Section */
+        #features {
+            background: var(--light-color);
+            padding: var(--spacing-lg) 0;
+        }
+
+        #features .container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .feature-box {
+            flex: 1;
+            min-width: 250px;
+            margin: var(--spacing-md);
+            padding: var(--spacing-md);
+            text-align: center;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .feature-box h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .product-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .product-card h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .product-card p {
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* Authentication Forms */
+        .auth-container {
+            padding: var(--spacing-lg) 0;
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--spacing-sm);
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: var(--spacing-sm);
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        .error-message {
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            margin-top: var(--spacing-sm);
+            display: block;
+        }
+
+        /* Cart Styles */
+        .cart-items {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md);
+            border-bottom: 1px solid #ddd;
+            background: white;
+            margin-bottom: var(--spacing-sm);
+            border-radius: var(--border-radius);
+        }
+
+        .item-details {
+            flex: 2;
+        }
+
+        .item-controls {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .item-controls button {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .item-controls button:hover {
+            background: #f5f5f5;
+        }
+
+        .item-subtotal {
+            flex: 1;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .cart-summary {
+            background: white;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-sm);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-item.total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-bottom: none;
+            color: var(--primary-color);
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        /* Checkout Styles */
+        .checkout-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        .order-summary, .shipping-form {
+            background: white;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .checkout-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-sm);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-totals {
+            margin-top: var(--spacing-md);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        /* About Page Styles */
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-md);
+        }
+
+        .student-info {
+            background: var(--light-color);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            margin: var(--spacing-md) 0;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: var(--border-radius);
+        }
+
+        /* Filter Section */
+        .filter-section {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .filter-section select {
+            padding: var(--spacing-sm);
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        /* Cart Notification */
+        .cart-notification {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: var(--success-color);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: var(--spacing-lg);
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: var(--spacing-md) 0;
+            margin-top: var(--spacing-lg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 950px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: var(--spacing-md);
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 var(--spacing-sm);
+            }
+            
+            .checkout-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            #features .container {
+                flex-direction: column;
+            }
+            
+            .feature-box {
+                margin: var(--spacing-sm) 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: var(--spacing-sm) 0;
+            }
+            
+            .cart-actions, .form-actions {
+                flex-direction: column;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-sm);
+            }
+
+            .item-controls, .item-subtotal {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">Melody</span> Makers</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="current"><a onclick="showPage('home')">Home</a></li>
+                    <li><a onclick="showPage('products')">Products</a></li>
+                    <li><a onclick="showPage('about')">About Us</a></li>
+                    <li><a onclick="showPage('cart')">Cart (<span id="cart-count">0</span>)</a></li>
+                    <li><a onclick="showPage('login')">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cart Notification -->
+    <div class="cart-notification" id="cart-notification">
+        Product added to cart!
+    </div>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="container">
+                <h1>Premium Musical Instruments & Expert Repairs</h1>
+                <p>Your one-stop shop for quality instruments and professional repair services</p>
+                <a onclick="showPage('products')" class="btn">Shop Now</a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features">
+            <div class="container">
+                <div class="feature-box">
+                    <h3>Quality Instruments</h3>
+                    <p>Hand-picked selection of premium musical instruments</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Expert Repairs</h3>
+                    <p>Professional repair services for all instrument types</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Fast Shipping</h3>
+                    <p>Free shipping on orders over J$40,000</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section id="featured-products">
+            <div class="container">
+                <h2>Featured Products</h2>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1516924962500-2b4b3b99ea02?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Acoustic Guitar">
+                        <h3>Acoustic Guitar</h3>
+                        <p>J$85,000</p>
+                        <button class="btn" onclick="addToCart('Acoustic Guitar', 85000)">Add to Cart</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Digital Piano">
+                        <h3>Digital Piano</h3>
+                        <p>J$185,000</p>
+                        <button class="btn" onclick="addToCart('Digital Piano', 185000)">Add to Cart</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1598488031591-0aa96c6516e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Drum Set">
+                        <h3>Drum Set</h3>
+                        <p>J$245,000</p>
+                        <button class="btn" onclick="addToCart('Drum Set', 245000)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Login Page -->
+    <section id="login" class="page">
+        <section class="auth-container">
+            <div class="container">
+                <h2>Login to Your Account</h2>
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required>
+                        <span class="error-message" id="usernameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                        <span class="error-message" id="passwordError"></span>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                    <p>Don't have an account? <a onclick="showPage('register')">Register here</a></p>
+                </form>
+            </div>
+        </section>
+    </section>
+
+    <!-- Registration Page -->
+    <section id="register" class="page">
+        <section class="auth-container">
+            <div class="container">
+                <h2>Create an Account</h2>
+                <form id="registerForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="fullName">Full Name:</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                        <span class="error-message" id="fullNameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth:</label>
+                        <input type="date" id="dob" name="dob" required>
+                        <span class="error-message" id="dobError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="regUsername">Username:</label>
+                        <input type="text" id="regUsername" name="regUsername" required>
+                        <span class="error-message" id="regUsernameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="regPassword">Password:</label>
+                        <input type="password" id="regPassword" name="regPassword" required>
+                        <span class="error-message" id="regPasswordError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password:</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        <span class="error-message" id="confirmPasswordError"></span>
+                    </div>
+                    <button type="submit" class="btn">Register</button>
+                    <p>Already have an account? <a onclick="showPage('login')">Login here</a></p>
+                </form>
+            </div>
+        </section>
+    </section>
+
+    <!-- Products Page -->
+    <section id="products" class="page">
+        <section id="products-section">
+            <div class="container">
+                <h2>Our Products</h2>
+                <div class="filter-section">
+                    <select id="categoryFilter">
+                        <option value="all">All Categories</option>
+                        <option value="guitars">Guitars</option>
+                        <option value="pianos">Pianos</option>
+                        <option value="drums">Drums</option>
+                        <option value="strings">String Instruments</option>
+                        <option value="repair">Repair Services</option>
+                    </select>
+                </div>
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be dynamically loaded here -->
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- About Us Page -->
+    <section id="about" class="page">
+        <section id="about-section">
+            <div class="container">
+                <h2>About Melody Makers</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Our Mission</h3>
+                        <p>To provide musicians with quality instruments and expert repair services, helping them create beautiful music.</p>
+                        
+                        <h3>Student Information</h3>
+                        <div class="student-info">
+                            <p><strong>Full Name:</strong> Omar Bailey</p>
+                            <p><strong>ID#:</strong> 2202366</p>
+                            <p><strong>Email:</strong> <a href="mailto:2202366@utech.edu.jm">2202366@utech.edu.jm</a></p>
+                            <p><strong>Module Code:</strong> CIT2011</p>
+                            <p><strong>Assignment Name:</strong> IA#2</p>
+                            <p><strong>Day/Time of Class:</strong> Tuesday @ 10:00 AM</p>
+                        </div>
+                        
+                        <h3>Contact Us</h3>
+                        <p>Have questions or need assistance? <a href="mailto:2202366@utech.edu.jm">Send us an email</a> and we'll be happy to help!</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1598488031591-0aa96c6516e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Instrument Repair">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Cart Page -->
+    <section id="cart" class="page">
+        <section id="cart-section">
+            <div class="container">
+                <h2>Shopping Cart</h2>
+                <div id="cartItems" class="cart-items">
+                    <!-- Cart items will be dynamically loaded here -->
+                </div>
+                <div class="cart-summary">
+                    <div class="summary-item">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">J$0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Tax (15%):</span>
+                        <span id="tax">J$0.00</span>
+                    </div>
+                    <div class="summary-item total">
+                        <span>Total:</span>
+                        <span id="total">J$0.00</span>
+                    </div>
+                    <div class="cart-actions">
+                        <button id="clearCart" class="btn btn-secondary">Clear All</button>
+                        <button id="checkoutBtn" class="btn">Check Out</button>
+                        <button class="btn btn-outline" onclick="showPage('products')">Continue Shopping</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Checkout Page -->
+    <section id="checkout" class="page">
+        <section id="checkout-section">
+            <div class="container">
+                <h2>Checkout</h2>
+                <div class="checkout-content">
+                    <div class="order-summary">
+                        <h3>Order Summary</h3>
+                        <div id="checkoutItems">
+                            <!-- Order items will be dynamically loaded here -->
+                        </div>
+                        <div class="order-totals">
+                            <div class="summary-item">
+                                <span>Subtotal:</span>
+                                <span id="checkoutSubtotal">J$0.00</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Tax:</span>
+                                <span id="checkoutTax">J$0.00</span>
+                            </div>
+                            <div class="summary-item total">
+                                <span>Total:</span>
+                                <span id="checkoutTotal">J$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shipping-form">
+                        <h3>Shipping Information</h3>
+                        <form id="checkoutForm">
+                            <div class="form-group">
+                                <label for="checkoutFullName">Full Name:</label>
+                                <input type="text" id="checkoutFullName" name="checkoutFullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="checkoutEmail">Email:</label>
+                                <input type="email" id="checkoutEmail" name="checkoutEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="checkoutAddress">Address:</label>
+                                <input type="text" id="checkoutAddress" name="checkoutAddress" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="checkoutCity">City:</label>
+                                <input type="text" id="checkoutCity" name="checkoutCity" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="checkoutZipCode">Zip Code:</label>
+                                <input type="text" id="checkoutZipCode" name="checkoutZipCode" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="paymentAmount">Amount Being Paid (J$):</label>
+                                <input type="number" id="paymentAmount" name="paymentAmount" step="0.01" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" id="confirmOrder" class="btn">Confirm Order</button>
+                                <button type="button" id="cancelOrder" class="btn btn-secondary" onclick="showPage('cart')">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Melody Makers. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Cart Management
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // DOM Manipulation Functions
+        function getElement(selector) {
+            return document.querySelector(selector);
+        }
+
+        function getAllElements(selector) {
+            return document.querySelectorAll(selector);
+        }
+
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show the selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            const navItems = document.querySelectorAll('nav ul li');
+            navItems.forEach(item => {
+                item.classList.remove('current');
+            });
+            
+            // Find and set current nav item
+            const currentNavItem = Array.from(navItems).find(item => 
+                item.querySelector('a').getAttribute('onclick') === `showPage('${pageId}')`
+            );
+            
+            if (currentNavItem) {
+                currentNavItem.classList.add('current');
+            }
+            
+            // Update page-specific content
+            if (pageId === 'cart' || pageId === 'checkout') {
+                displayCartItems();
+            }
+            
+            if (pageId === 'products') {
+                displayProducts();
+            }
+        }
+
+        // Cart Functions
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    quantity: 1
+                });
+            }
+            
+            updateCartStorage();
+            updateCartCount();
+            showCartNotification();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartStorage();
+            displayCartItems();
+            updateCartCount();
+        }
+
+        function updateQuantity(index, change) {
+            cart[index].quantity += change;
+            
+            if (cart[index].quantity <= 0) {
+                removeFromCart(index);
+            } else {
+                updateCartStorage();
+                displayCartItems();
+                updateCartCount();
+            }
+        }
+
+        function clearCart() {
+            cart = [];
+            updateCartStorage();
+            displayCartItems();
+            updateCartCount();
+        }
+
+        function updateCartStorage() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            getElement('#cart-count').textContent = count;
+        }
+
+        function showCartNotification() {
+            const notification = getElement('#cart-notification');
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+
+        function calculateCartTotals() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const tax = subtotal * 0.15; // 15% tax
+            const total = subtotal + tax;
+            
+            return {
+                subtotal: subtotal.toFixed(2),
+                tax: tax.toFixed(2),
+                total: total.toFixed(2)
+            };
+        }
+
+        // Display Cart Items
+        function displayCartItems() {
+            const cartItemsElement = getElement('#cartItems');
+            const checkoutItemsElement = getElement('#checkoutItems');
+            
+            if (cartItemsElement) {
+                if (cart.length === 0) {
+                    cartItemsElement.innerHTML = '<div class="empty-state">Your cart is empty</div>';
+                } else {
+                    cartItemsElement.innerHTML = cart.map((item, index) => `
+                        <div class="cart-item">
+                            <div class="item-details">
+                                <h4>${item.name}</h4>
+                                <p>Price: J$${item.price.toLocaleString()}</p>
+                            </div>
+                            <div class="item-controls">
+                                <button onclick="updateQuantity(${index}, -1)">-</button>
+                                <span>Qty: ${item.quantity}</span>
+                                <button onclick="updateQuantity(${index}, 1)">+</button>
+                                <button onclick="removeFromCart(${index})" class="btn btn-secondary">Remove</button>
+                            </div>
+                            <div class="item-subtotal">
+                                J$${(item.price * item.quantity).toLocaleString()}
+                            </div>
+                        </div>
+                    `).join('');
+                }
+                
+                const totals = calculateCartTotals();
+                getElement('#subtotal').textContent = `J$${parseFloat(totals.subtotal).toLocaleString()}`;
+                getElement('#tax').textContent = `J$${parseFloat(totals.tax).toLocaleString()}`;
+                getElement('#total').textContent = `J$${parseFloat(totals.total).toLocaleString()}`;
+            }
+            
+            if (checkoutItemsElement) {
+                if (cart.length === 0) {
+                    checkoutItemsElement.innerHTML = '<div class="empty-state">No items in cart</div>';
+                } else {
+                    checkoutItemsElement.innerHTML = cart.map(item => `
+                        <div class="checkout-item">
+                            <span>${item.name} (${item.quantity})</span>
+                            <span>J$${(item.price * item.quantity).toLocaleString()}</span>
+                        </div>
+                    `).join('');
+                    
+                    const totals = calculateCartTotals();
+                    getElement('#checkoutSubtotal').textContent = `J$${parseFloat(totals.subtotal).toLocaleString()}`;
+                    getElement('#checkoutTax').textContent = `J$${parseFloat(totals.tax).toLocaleString()}`;
+                    getElement('#checkoutTotal').textContent = `J$${parseFloat(totals.total).toLocaleString()}`;
+                }
+            }
+        }
+
+        // Form Validation
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function validatePassword(password) {
+            return password.length >= 6;
+        }
+
+        function validateForm(formData) {
+            const errors = {};
+            
+            if (formData.fullName && formData.fullName.trim().length < 2) {
+                errors.fullName = 'Full name must be at least 2 characters long';
+            }
+            
+            if (formData.email && !validateEmail(formData.email)) {
+                errors.email = 'Please enter a valid email address';
+            }
+            
+            if (formData.username && formData.username.trim().length < 3) {
+                errors.username = 'Username must be at least 3 characters long';
+            }
+            
+            if (formData.password && !validatePassword(formData.password)) {
+                errors.password = 'Password must be at least 6 characters long';
+            }
+            
+            if (formData.confirmPassword && formData.password !== formData.confirmPassword) {
+                errors.confirmPassword = 'Passwords do not match';
+            }
+            
+            return errors;
+        }
+
+        // Product Data with realistic Jamaican prices
+        const products = [
+            {
+                id: 1,
+                name: "Acoustic Guitar",
+                price: 85000,
+                category: "guitars",
+                image: "https://images.unsplash.com/photo-1516924962500-2b4b3b99ea02?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                description: "Professional acoustic guitar with rich sound"
+            },
+            {
+                id: 2,
+                name: "Electric Guitar",
+                price: 125000,
+                category: "guitars",
+                image: "https://images.unsplash.com/photo-1550985616-10810253dc04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+                description: "Premium electric guitar with amplifier"
+            },
+            {
+                id: 3,
+                name: "Digital Piano",
+                price: 185000,
+                category: "pianos",
+                image: "https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                description: "88-key digital piano with weighted keys"
+            },
+            {
+                id: 4,
+                name: "Drum Set",
+                price: 245000,
+                category: "drums",
+                image: "https://images.unsplash.com/photo-1598488031591-0aa96c6516e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                description: "Complete 5-piece drum set with cymbals"
+            },
+            {
+                id: 5,
+                name: "Violin",
+                price: 65000,
+                category: "strings",
+                image: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                description: "Classical violin with bow and case"
+            },
+            {
+                id: 6,
+                name: "Instrument Repair Service",
+                price: 15000,
+                category: "repair",
+                image: "https://images.unsplash.com/photo-1598488031591-0aa96c6516e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                description: "Professional repair and maintenance service"
+            },
+            {
+                id: 7,
+                name: "Bass Guitar",
+                price: 95000,
+                category: "guitars",
+                image: "https://images.unsplash.com/photo-1598488031591-0aa96c6516e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                description: "4-string bass guitar with powerful sound"
+            },
+            {
+                id: 8,
+                name: "Saxophone",
+                price: 135000,
+                category: "wind",
+                image: "https://images.unsplash.com/photo-1567427018140-e0c36d0b8f66?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                description: "Alto saxophone with case and cleaning kit"
+            }
+        ];
+
+        // Display Products
+        function displayProducts(filter = 'all') {
+            const productsGrid = getElement('#productsGrid');
+            if (!productsGrid) return;
+            
+            const filteredProducts = filter === 'all' 
+                ? products 
+                : products.filter(product => product.category === filter);
+            
+            productsGrid.innerHTML = filteredProducts.map(product => `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>J$${product.price.toLocaleString()}</p>
+                    <p class="product-description">${product.description}</p>
+                    <button class="btn" onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
+                </div>
+            `).join('');
+        }
+
+        // Filter Products
+        function filterProducts() {
+            const filter = getElement('#categoryFilter').value;
+            displayProducts(filter);
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize products
+            displayProducts();
+            updateCartCount();
+            
+            // Login Form Handler
+            const loginForm = getElement('#loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = {
+                        username: getElement('#username').value,
+                        password: getElement('#password').value
+                    };
+                    
+                    const errors = validateForm(formData);
+                    
+                    // Clear previous errors
+                    getAllElements('.error-message').forEach(el => el.textContent = '');
+                    
+                    if (Object.keys(errors).length === 0) {
+                        alert('Login successful!');
+                        showPage('home');
+                    } else {
+                        Object.keys(errors).forEach(key => {
+                            const errorElement = getElement(`#${key}Error`);
+                            if (errorElement) {
+                                errorElement.textContent = errors[key];
+                            }
+                        });
+                    }
+                });
+            }
+            
+            // Registration Form Handler
+            const registerForm = getElement('#registerForm');
+            if (registerForm) {
+                registerForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = {
+                        fullName: getElement('#fullName').value,
+                        email: getElement('#email').value,
+                        username: getElement('#regUsername').value,
+                        password: getElement('#regPassword').value,
+                        confirmPassword: getElement('#confirmPassword').value
+                    };
+                    
+                    const errors = validateForm(formData);
+                    
+                    // Clear previous errors
+                    getAllElements('.error-message').forEach(el => el.textContent = '');
+                    
+                    if (Object.keys(errors).length === 0) {
+                        alert('Registration successful!');
+                        showPage('login');
+                    } else {
+                        Object.keys(errors).forEach(key => {
+                            const errorElement = getElement(`#${key}Error`);
+                            if (errorElement) {
+                                errorElement.textContent = errors[key];
+                            }
+                        });
+                    }
+                });
+            }
+            
+            // Cart Event Listeners
+            const clearCartBtn = getElement('#clearCart');
+            if (clearCartBtn) {
+                clearCartBtn.addEventListener('click', clearCart);
+            }
+            
+            const checkoutBtn = getElement('#checkoutBtn');
+            if (checkoutBtn) {
+                checkoutBtn.addEventListener('click', function() {
+                    if (cart.length === 0) {
+                        alert('Your cart is empty!');
+                    } else {
+                        showPage('checkout');
+                        displayCartItems();
+                        // Pre-fill email if user is logged in
+                        const email = getElement('#email') ? getElement('#email').value : '';
+                        if (email) {
+                            getElement('#checkoutEmail').value = email;
+                        }
+                    }
+                });
+            }
+            
+            // Checkout Event Listeners
+            const confirmOrderBtn = getElement('#confirmOrder');
+            if (confirmOrderBtn) {
+                confirmOrderBtn.addEventListener('click', function() {
+                    const paymentAmount = parseFloat(getElement('#paymentAmount').value);
+                    const totals = calculateCartTotals();
+                    const totalAmount = parseFloat(totals.total);
+                    
+                    if (paymentAmount >= totalAmount) {
+                        alert('Order confirmed! Thank you for your purchase.');
+                        clearCart();
+                        showPage('home');
+                    } else {
+                        alert(`Insufficient payment. Total amount is J$${totalAmount.toLocaleString()}`);
+                    }
+                });
+            }
+            
+            // Product Filter
+            const categoryFilter = getElement('#categoryFilter');
+            if (categoryFilter) {
+                categoryFilter.addEventListener('change', filterProducts);
+            }
+        });
+    </script>
+</body>
+</html>
