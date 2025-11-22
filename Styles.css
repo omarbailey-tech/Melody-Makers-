@@ -1,4 +1,4 @@
-/* CSS Variables for consistent theming */
+
 :root {
     --primary-color: #2c3e50;
     --secondary-color: #3498db;
@@ -507,4 +507,5 @@ footer {
         width: 100%;
         justify-content: space-between;
     }
+
 }
